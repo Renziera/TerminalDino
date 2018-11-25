@@ -5,7 +5,8 @@
         "thread": "cpp",
         "chrono": "cpp",
         "cerrno": "cpp",
-        "string_view": "cpp"
+        "string_view": "cpp",
+        "list": "cpp"
     },
     "terminal.integrated.shell.windows": "cmd.exe"
 }
