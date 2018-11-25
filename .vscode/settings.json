@@ -1,6 +1,11 @@
 {
     "files.associations": {
-        "*.tpp": "cpp"
+        "*.tpp": "cpp",
+        "iostream": "cpp",
+        "thread": "cpp",
+        "chrono": "cpp",
+        "cerrno": "cpp",
+        "string_view": "cpp"
     },
     "terminal.integrated.shell.windows": "cmd.exe"
 }
