@@ -2,11 +2,9 @@
  * @Author: Renz 
  * @Date: 2018-11-25 21:19:28 
  * @Last Modified by: Stanley Heryanto
- * @Last Modified time: 2018-11-25 22:03:49
+ * @Last Modified time: 2018-11-25 23:14:45
  */
 #include "screen.hpp"
-#include <ncurses.h>
-#include <iostream>
 
 using namespace std;
 
@@ -14,7 +12,7 @@ WINDOW* window;
 
 void initScreen(){
     window = initscr();     //masuk mode ncurses
-    cbreak();   //gak nunggu newline untuk getch()
+    cbreak();   //gak nyari newline untuk getch()
     noecho();   //key yang ditekan tidak muncul di layar
     clear();
     refresh();
