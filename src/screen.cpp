@@ -2,7 +2,7 @@
  * @Author: Renz 
  * @Date: 2018-11-25 21:19:28 
  * @Last Modified by: Stanley Heryanto
- * @Last Modified time: 2018-11-25 23:14:45
+ * @Last Modified time: 2018-11-25 23:43:56
  */
 #include "screen.hpp"
 
@@ -36,7 +36,7 @@ void initScreen(){
 }
 
 void drawScreen(){
-    refresh();
+    refresh();      //meng-update layar asli dengan buffer
 }
 
 void finishScreen(){
