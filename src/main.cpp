@@ -13,16 +13,25 @@ using namespace std;
 int main(int argc, char* argv[]) {
 
     system("clear");
-    cout << "Welcome to Terminal Dino\nPlease play this game on 80x24 terminal\n";
+    cout << "Welcome to Terminal Dino\n"
+         << "Please play this game on 80x24 terminal\n";
     
     initScreen();
-    
+    initGame();
+
     while(isPlaying){
         handleInput();
+        moveBlock();
         drawScreen();
         sleep(20);
     }
 
+    mvaddstr(10, 35, "Game Over");
+    mvaddstr(11, 33, "Press any key");
+    drawScreen();
+    getchar();
     finishScreen();
+    int x;
+    cin >> x;
     return 0;
 }

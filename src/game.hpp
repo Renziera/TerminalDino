@@ -8,5 +8,7 @@
 
 extern bool isPlaying;
 void handleInput();
+void moveBlock();
+void initGame();
 
 #endif

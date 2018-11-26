@@ -20,10 +20,21 @@ struct {
     char disp_char = 'O';
 } dino;
 
+//struct kaktus (ceritanya)
 struct {
-    vec2D pos;
+    vec2D pos = {100, 20};  //sengaja di luar arena
     char disp_char = 'I';
 } block1, block2;
+
+bool block1Ready = true;    //ready berarti lagi gak di layar
+bool block2Ready = true;
+
+void initGame(){
+    srand(time(NULL));
+    isPlaying = true;
+    block1Ready = true;
+    block2Ready = true;
+}
 
 int in_char;
 bool isPlaying = true;
@@ -88,9 +99,65 @@ void handleInput(){
 }
 
 void moveBlock(){
+    //clear all blocks
     mvaddch(block1.pos.y, block1.pos.x, ' ');
+    mvaddch(block1.pos.y, block1.pos.x + 1, ' ');
+    mvaddch(block1.pos.y + 1, block1.pos.x, ' ');
+    mvaddch(block1.pos.y + 2, block1.pos.x, ' ');
+    mvaddch(block1.pos.y + 1, block1.pos.x + 1, ' ');
+    mvaddch(block1.pos.y + 2, block1.pos.x + 1, ' ');
+
+    mvaddch(block2.pos.y, block2.pos.x, ' ');
+    mvaddch(block2.pos.y, block2.pos.x + 1, ' ');
+    mvaddch(block2.pos.y + 1, block2.pos.x, ' ');
+    mvaddch(block2.pos.y + 2, block2.pos.x, ' ');
+    mvaddch(block2.pos.y + 1, block2.pos.x + 1, ' ');
+    mvaddch(block2.pos.y + 2, block2.pos.x + 1, ' ');
+
+    //gerakin blocks
+    if(block1Ready){
+        if(rand() % 8 == 0){
+            block1.pos.x = rand() % 100 + 100;  //instantiate di kanan arena
+            block1Ready = false;
+        }
+    }else{
+        block1.pos.x--;
+        if(block1.pos.x < 1){     //sudah di luar arena
+            block1.pos.x = 100;     //buang keluar arena
+            block1Ready = true;
+        }
+    }
+
+    if(block2Ready){
+        if(rand() % 8 == 0){
+            block2.pos.x = rand() % 100 + 100;  //instantiate di kanan arena
+            block2Ready = false;
+        }
+    }else{
+        block2.pos.x--;
+        if(block2.pos.x < 1){     //sudah di luar arena
+            block2.pos.x = 100;     //buang keluar arena
+            block2Ready = true;
+        }
+    }
+
+
+    //draw blocks
+    mvaddch(block1.pos.y, block1.pos.x, block1.disp_char);
+    mvaddch(block1.pos.y, block1.pos.x + 1, block1.disp_char);
+    mvaddch(block1.pos.y + 1, block1.pos.x, block1.disp_char);
+    mvaddch(block1.pos.y + 2, block1.pos.x, block1.disp_char);
+    mvaddch(block1.pos.y + 1, block1.pos.x + 1, block1.disp_char);
+    mvaddch(block1.pos.y + 2, block1.pos.x + 1, block1.disp_char);
+
+    mvaddch(block2.pos.y, block2.pos.x, block2.disp_char);
+    mvaddch(block2.pos.y, block2.pos.x + 1, block2.disp_char);
+    mvaddch(block2.pos.y + 1, block2.pos.x, block2.disp_char);
+    mvaddch(block2.pos.y + 2, block2.pos.x, block2.disp_char);
+    mvaddch(block2.pos.y + 1, block2.pos.x + 1, block2.disp_char);
+    mvaddch(block2.pos.y + 2, block2.pos.x + 1, block2.disp_char);
 }
 
-bool isGameOver(){
-
+void checkGameOver(){
+    
 }
