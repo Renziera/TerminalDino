@@ -11,6 +11,7 @@ using namespace std;
 WINDOW* window;
 
 void initScreen(){
+    //Program ini berasumsi terminal memiliki default size 80x24
     window = initscr();     //masuk mode ncurses
     cbreak();   //gak nyari newline untuk getch()
     noecho();   //key yang ditekan tidak muncul di layar
@@ -33,9 +34,15 @@ void initScreen(){
 
     init_pair(1, COLOR_BLACK, COLOR_BLUE);      //deklarasi warna
     wbkgd(window, COLOR_PAIR(1));               //set warna
+
+    mvaddstr(1, 33, "Terminal Dino");
+    mvaddstr(2, 2, "Press Q to quit");
+    mvaddstr(3, 2, "Space or UP to jump");
+    mvaddstr(2, 60, "Score:");
 }
 
 void drawScreen(){
+    box(window, 0, 0);
     refresh();      //meng-update layar asli dengan buffer
 }
 

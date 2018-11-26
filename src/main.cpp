@@ -11,12 +11,16 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
+
+    system("clear");
+    cout << "Welcome to Terminal Dino\nPlease play this game on 80x24 terminal\n";
+    
     initScreen();
     
     while(isPlaying){
         handleInput();
         drawScreen();
-        sleep(10);
+        sleep(20);
     }
 
     finishScreen();

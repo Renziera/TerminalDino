@@ -3,6 +3,8 @@
 
 #include "screen.hpp"
 #include <cstdint>
+#include<cstdlib>
+#include<ctime>
 
 extern bool isPlaying;
 void handleInput();

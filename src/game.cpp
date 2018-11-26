@@ -16,15 +16,26 @@ struct vec2D {
 
 //struct player
 struct {
-    vec2D pos = {10, 5};
+    vec2D pos = {10, 21};
     char disp_char = 'O';
 } dino;
+
+struct {
+    vec2D pos;
+    char disp_char = 'I';
+} block1, block2;
 
 int in_char;
 bool isPlaying = true;
 
+int jumpTick;
+bool isJumping = false;
+
 void handleInput(){
-    mvaddch(dino.pos.y, dino.pos.x,' ');
+    mvaddch(dino.pos.y, dino.pos.x, ' ');
+    mvaddch(dino.pos.y + 1, dino.pos.x, ' ');
+    mvaddch(dino.pos.y, dino.pos.x + 1, ' ');
+    mvaddch(dino.pos.y + 1, dino.pos.x + 1, ' ');
     in_char = wgetch(window);
     switch (in_char){
         case 'q':
@@ -32,20 +43,54 @@ void handleInput(){
             break;
         case KEY_UP:
         case 'w':
-            dino.pos.y -= 1;
+        case ' ':
+            if(dino.pos.y == 21){   //sedang di tanah
+                isJumping = true;
+                jumpTick = 0;
+                beep();
+            }
             break;
         case KEY_DOWN:
         case 's':
-            dino.pos.y += 1;
-            break;
-        case KEY_LEFT:
-        case 'a':
-            dino.pos.x -= 1;
-            break;
-        case KEY_RIGHT:
-        case 'd':
-            dino.pos.x += 1;
+            if(isJumping && dino.pos.y < 18){
+                dino.pos.y += 2;   //ke bawah
+            }
             break;
     }
+
+    if(isJumping){
+
+        if(dino.pos.y >= 21 && jumpTick > 1){
+            isJumping = false;
+            jumpTick = 0;
+        }
+
+        jumpTick++;
+        if(jumpTick % 2 == 0 && jumpTick < 25){
+            dino.pos.y--;      //ke atas
+        }
+        
+        if(jumpTick % 2 == 0 && jumpTick > 25){
+            dino.pos.y++;   //ke bawah
+        }
+
+        if(jumpTick > 48){
+            isJumping = false;
+            jumpTick = 0;
+        }
+
+    }
+
     mvaddch(dino.pos.y, dino.pos.x, dino.disp_char);
+    mvaddch(dino.pos.y + 1, dino.pos.x, dino.disp_char);
+    mvaddch(dino.pos.y, dino.pos.x + 1, dino.disp_char);
+    mvaddch(dino.pos.y + 1, dino.pos.x + 1, dino.disp_char);
+}
+
+void moveBlock(){
+    mvaddch(block1.pos.y, block1.pos.x, ' ');
+}
+
+bool isGameOver(){
+
 }
