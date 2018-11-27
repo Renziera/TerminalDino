@@ -47,5 +47,9 @@ void drawScreen(){
 }
 
 void finishScreen(){
+    mvaddstr(10, 35, "Game Over");
+    mvaddstr(11, 33, "Press any key");
+    drawScreen();
+    getchar();
     endwin();   //keluar mode ncurses
 }

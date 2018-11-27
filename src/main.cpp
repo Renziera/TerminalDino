@@ -7,31 +7,61 @@
 #include "timekeeper.hpp"
 #include "screen.hpp"
 #include "game.hpp"
+#include "counter.hpp"
 
 using namespace std;
 
 int main(int argc, char* argv[]) {
-
-    system("clear");
-    cout << "Welcome to Terminal Dino\n"
-         << "Please play this game on 80x24 terminal\n";
     
-    initScreen();
-    initGame();
+    string nama;
+    ushort pilihan;
+    bool lanjut = true;
 
-    while(isPlaying){
-        handleInput();
-        moveBlock();
-        drawScreen();
-        sleep(20);
+    while(lanjut){
+        system("clear");
+        cout << "Welcome to Terminal Dino\n"
+             << "Please play this game on 80x24 terminal\n\n"
+             << "1.Play game\n2.View score\n3.Search player\n4.Exit\n"
+             << "Enter choice: ";
+        
+        do{
+            cin >> pilihan;
+        }while(pilihan != 1 || pilihan != 2 || pilihan != 3 || pilihan != 4);
+    
+    switch(pilihan){
+        case 1:
+            cin >> nama;
+    
+            initScreen();
+            initGame();
+            initScore(nama);
+
+            while(isPlaying){
+                moveBlock();
+                handleInput();
+                drawScreen();
+                checkGameOver();
+                sleep(20);
+            }
+
+            finishScreen();
+            writeScore();   
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            system("clear");
+            lanjut = false;
+            break;
     }
 
-    mvaddstr(10, 35, "Game Over");
-    mvaddstr(11, 33, "Press any key");
-    drawScreen();
-    getchar();
-    finishScreen();
-    int x;
+    
+    string x;
+    getline(cin, x);
+    cout << x;
     cin >> x;
+    }
     return 0;
 }

@@ -159,5 +159,36 @@ void moveBlock(){
 }
 
 void checkGameOver(){
-    
+    //only check at collision site
+    if(block1.pos.x == 9 || block1.pos.x == 10 || block1.pos.x == 11){
+        if(
+            block1.pos.y == dino.pos.y + 1 ||
+            block1.pos.y + 1 == dino.pos.y + 1 ||
+            block1.pos.y + 2 == dino.pos.y + 1
+            ){
+            isPlaying = false;
+            beep();
+            beep();
+            beep();
+            return;
+        }
+    }
+
+    if(block2.pos.x == 9 || block2.pos.x == 10 || block2.pos.x == 11){
+        if(
+            block2.pos.y == dino.pos.y + 1 ||
+            block2.pos.y + 1 == dino.pos.y + 1 ||
+            block2.pos.y + 2 == dino.pos.y + 1
+            ){
+            isPlaying = false;
+            beep();
+            beep();
+            beep();
+            return;
+        }
+    }
+
+    //nambah skor
+    updateScore();
+    mvaddstr(2, 67, to_string(currentScore).c_str());
 }
