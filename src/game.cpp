@@ -36,6 +36,7 @@ void initGame(){
     block2Ready = true;
     block1.pos = {100, 20};
     block2.pos = {100, 20};
+    dino.pos = {10, 21};
 }
 
 int in_char;

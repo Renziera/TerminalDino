@@ -12,6 +12,7 @@ string namaPemain[100];
 unsigned long skorPemain[100];
 unsigned short session;     //Berapa kali game telah berlangsung
 unsigned long currentScore; //variabel untuk menyimpan skor game skrg
+void bubbleSort();  //deklarasi fungsi
 
 void initScore(string nama){
     currentScore = 0; 
@@ -29,22 +30,73 @@ void writeScore(){
 }
 
 void viewScores(){
-    cout << "\t\t\tHigh scores" << endl << endl;
-    cout << "\tPlayer Name\t\t\tScore" << endl;
-
+    cout << "\t\tHigh scores" << endl << endl;
+    cout << "\tPlayer Name         \tScore" << endl;
+    bubbleSort();
     for(int i = 0; i < session; i++){
-        cout << "\t" << namaPemain[i] << "\t\t\t" << skorPemain[i] << endl; 
+        cout << i+1 << "\t" << namaPemain[i] <<  "\t" << skorPemain[i] << endl; 
     }
+    if(session == 0){
+        cout << endl << "No game been played." << endl;
+    }
+    cout << endl << "Press enter to return to menu" << endl;
     cin.ignore();
     getchar();
 }
 
-void bubbleSort(){
+//pencarian sequential
+void searchPlayer(string name){
+    cout << "\nResult for " << name << endl << endl;
+    cout << "\tPlayer Name         \tScore" << endl;
+    bool found = false;
+    bubbleSort();
     for(int i = 0; i < session; i++){
-        for(int j = 1; j < session; j++){
-            if(skorPemain[i] < skorPemain[j]){
-                swap(skorPemain[i], skorPemain[j]);
+        if(namaPemain[i].find(name) != string::npos){
+            cout << i+1 << "\t" << namaPemain[i] <<  "\t" << skorPemain[i] << endl;
+            found = true;
+        }
+    }
+
+    if(!found){
+        cout << endl << "Entry not found" << endl;
+    }
+
+    cout << endl << "Press enter to return to menu" << endl;
+    
+    getchar();
+}
+
+//Pengurutan descending
+void bubbleSort(){
+    for(int i = 0; i < session - 1; i++){
+        for(int j = 0; j < session - i - 1; j++){
+            if(skorPemain[j] < skorPemain[j+1]){
+                swap(skorPemain[j], skorPemain[j+1]);
+                swap(namaPemain[j], namaPemain[j+1]);
             }
         }
+    }
+}
+
+//untuk menyimpan skor ke file
+void writeToFile(){
+    ofstream fileku;
+    fileku.open("skor");
+    for(int i = 0; i < session; i++){
+        fileku << namaPemain[i] << endl;
+        fileku << skorPemain[i] << endl;
+    }
+    fileku.close();
+}
+
+void readFromFile(){
+    ifstream fileku;
+    fileku.open("skor");
+    session = 0;
+    string temp;
+    while(!fileku.eof()){
+        getline(fileku, namaPemain[session]);
+        getline(fileku, temp);
+        skorPemain[session] = stol(temp);
     }
 }

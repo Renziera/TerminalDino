@@ -21,20 +21,32 @@ int main(int argc, char* argv[]) {
         system("clear");
         cout << "Welcome to Terminal Dino\n"
              << "Please play this game on 80x24 terminal\n\n"
-             << "1.Play game\n2.View scores\n3.Search player\n4.Exit\n"
-             << "Enter choice: ";
+             << "1.Play game\n2.View scores\n3.Search player\n4.Exit\n";
         
         do{
-            cin >> pilihan;
-            cout << "pilihan: " << pilihan << endl;
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore();
+            }
+            cout << "Enter choice: ";
+            cin >> pilihan; 
         }while(pilihan != 1 && pilihan != 2 && pilihan != 3 && pilihan != 4);
         system("clear");
 
         switch(pilihan){
             case 1:
+                cout << "Play Terminal Dino" << endl << endl;
                 cout << "Enter player name: ";
                 cin.ignore();
                 getline(cin, nama);
+                nama.resize(20, ' ');   //nama di limit 20 char
+                cout << "Get ready!" << endl;
+                for(int i = 3; i > 0; i--){
+                    sleep(500);
+                    cout << i << "..." << endl;
+                    beep();
+                }
+                sleep(200);
                 //inisiasi
                 initScreen();
                 initGame();
@@ -55,11 +67,21 @@ int main(int argc, char* argv[]) {
                 viewScores();
                 break;
             case 3:
+                cout << "Player search" << endl;
+                cout << "Enter player name: ";
+                cin.ignore();
+                getline(cin, nama);
+                searchPlayer(nama);
                 break;
             case 4:
                 lanjut = false;
+                cout << "Thank you for playing!" << endl;
+                sleep(500);
+                cout << "Have a good day :D" << endl;
+                sleep(1000);
+                system("clear");
                 break;
-            }
+        }
     }
     return 0;
 }
