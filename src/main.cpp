@@ -17,11 +17,13 @@ int main(int argc, char* argv[]) {
     ushort pilihan;
     bool lanjut = true;
 
+    readFromFile();
+
     while(lanjut){
         system("clear");
         cout << "Welcome to Terminal Dino\n"
              << "Please play this game on 80x24 terminal\n\n"
-             << "1.Play game\n2.View scores\n3.Search player\n4.Exit\n";
+             << "1.Play game\n2.View scores\n3.Search player\n4.Reset Score\n5.Exit\n";
         
         do{
             if(cin.fail()){
@@ -30,7 +32,7 @@ int main(int argc, char* argv[]) {
             }
             cout << "Enter choice: ";
             cin >> pilihan; 
-        }while(pilihan != 1 && pilihan != 2 && pilihan != 3 && pilihan != 4);
+        }while(pilihan != 1 && pilihan != 2 && pilihan != 3 && pilihan != 4 && pilihan != 5);
         system("clear");
 
         switch(pilihan){
@@ -74,7 +76,11 @@ int main(int argc, char* argv[]) {
                 searchPlayer(nama);
                 break;
             case 4:
+                resetScore();
+                break;
+            case 5:
                 lanjut = false;
+                writeToFile();
                 cout << "Thank you for playing!" << endl;
                 sleep(500);
                 cout << "Have a good day :D" << endl;

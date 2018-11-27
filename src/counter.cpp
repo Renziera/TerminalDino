@@ -94,9 +94,21 @@ void readFromFile(){
     fileku.open("skor");
     session = 0;
     string temp;
-    while(!fileku.eof()){
-        getline(fileku, namaPemain[session]);
+    while(getline(fileku, namaPemain[session])){
         getline(fileku, temp);
-        skorPemain[session] = stol(temp);
+        skorPemain[session] = stol(temp, nullptr, 10);
+        session++;
     }
+    fileku.close();
+}
+
+void resetScore(){
+    cout << "Reset score" << endl;
+    session = 0;
+    remove("skor");
+    cout << "Score reset successfully" << endl;
+    
+    cout << endl << "Press enter to return to menu" << endl;
+    cin.ignore();
+    getchar();
 }

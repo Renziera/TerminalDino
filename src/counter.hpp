@@ -12,4 +12,8 @@ void writeScore();
 void viewScores();
 void searchPlayer(std::string);
 
+void readFromFile();
+void writeToFile();
+void resetScore();
+
 #endif
