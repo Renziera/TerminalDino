@@ -28,6 +28,17 @@ void writeScore(){
     session++;
 }
 
+void viewScores(){
+    cout << "\t\t\tHigh scores" << endl << endl;
+    cout << "\tPlayer Name\t\t\tScore" << endl;
+
+    for(int i = 0; i < session; i++){
+        cout << "\t" << namaPemain[i] << "\t\t\t" << skorPemain[i] << endl; 
+    }
+    cin.ignore();
+    getchar();
+}
+
 void bubbleSort(){
     for(int i = 0; i < session; i++){
         for(int j = 1; j < session; j++){

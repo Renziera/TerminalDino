@@ -34,6 +34,8 @@ void initGame(){
     isPlaying = true;
     block1Ready = true;
     block2Ready = true;
+    block1.pos = {100, 20};
+    block2.pos = {100, 20};
 }
 
 int in_char;
